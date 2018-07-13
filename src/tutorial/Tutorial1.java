@@ -1,4 +1,4 @@
-package plotter.tutorial;
+package tutorial;
 
 import static java.lang.Math.*;
 
