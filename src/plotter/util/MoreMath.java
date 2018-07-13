@@ -1,4 +1,4 @@
-package util;
+package plotter.util;
 
 import flanagan.integration.IntegralFunction;
 import flanagan.math.ArrayMaths;

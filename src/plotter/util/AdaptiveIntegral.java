@@ -1,4 +1,4 @@
-package util;
+package plotter.util;
 
 /*************************************************
  * This is a class designed to calculate the numerical
