@@ -737,7 +737,8 @@ public class MatlabChart {
     }
 
     public ChartPanel getChartPanel(){
-        return new ChartPanel(chart) ;
+    	return new CustomChartPanel(this.chart, 640, 450, 640, 450, 640, 450, true, true, true, true, true, true) ;
+//        return new ChartPanel(chart) ;
     }
 
     public ChartPanel getChartPanel(int width, int height){
