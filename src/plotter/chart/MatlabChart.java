@@ -721,6 +721,14 @@ public class MatlabChart {
         	chartFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
     }
+    
+    public void show() {
+    	this.run();
+    }
+    
+    public void show(boolean systemExit) {
+    	this.run(systemExit);
+    }
 
     public JFrame getChartJFrame(int width, int height){
         JFrame chartFrame = new JFrame() ;
