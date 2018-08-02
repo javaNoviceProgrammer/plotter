@@ -1,12 +1,19 @@
 package tutorial;
 
-import static java.lang.Math.*;
+import static java.lang.Math.PI;
+
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 
 import plotter.chart.MatlabChart;
 import plotter.util.MoreMath;
 
 public class Tutorial1 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedLookAndFeelException {
+		// 0. setting the UI look and feel
+		UIManager.setLookAndFeel(new WindowsLookAndFeel());
 		//1. define the x and y variables
 		double[] x = MoreMath.linspace(-3*PI, 3*PI, 1000) ;
 		double[] y = MoreMath.Arrays.Functions.sin(x) ;
