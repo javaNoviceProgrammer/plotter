@@ -97,6 +97,17 @@ public class MatlabChart {
         specs.add(spec) ;
         FindColor(spec,lineWidth);
     }
+    
+    public void plot(double[] x, double[] y, int colorId) {
+    	String title = "fig" + counter ;
+    	counter++ ;
+        final XYSeries series = new XYSeries(title);
+        for (int i = 0; i < x.length; i++)
+            series.add(x[i],y[i]);
+        dataset.addSeries(series);
+        specs.add("-") ;
+        FindColor(colorId, 1.0f);
+    }
 
     public void plot(double[] x, double[] y) {
     	String title = "fig" + counter ;
@@ -596,6 +607,16 @@ public class MatlabChart {
             color = Color.BLUE;
         else if (spec.contains("k"))
             color = Color.BLACK;
+        colors.add(color);
+        strokes.add(stroke);
+    }
+    
+    public void FindColor(int colorId, float lineWidth) {
+    	int r = (int) (Math.random() * 255) ;
+    	int g = (int) (Math.random() * 255) ;
+    	int b = (int) (Math.random() * 255) ;
+        Color color = new Color(r, g, b) ;                 
+        BasicStroke stroke = new BasicStroke(lineWidth); 
         colors.add(color);
         strokes.add(stroke);
     }
