@@ -97,7 +97,7 @@ public class MatlabChart {
         specs.add(spec) ;
         FindColor(spec,lineWidth);
     }
-    
+
     public void plot(double[] x, double[] y, int colorId) {
     	String title = "fig" + counter ;
     	counter++ ;
@@ -121,6 +121,21 @@ public class MatlabChart {
         specs.add(spec) ;
         FindColor(spec,lineWidth);
     }
+
+//    public void plot(double[] x, Complex[] y) {
+//    	String title = "fig" + counter ;
+//    	counter++ ;
+//        String spec = "-b" ;
+//        float lineWidth = 1 ;
+//        final XYSeries series = new XYSeries(title);
+//        for (int i = 0; i < x.length; i++)
+//            series.add(x[i],y[i]);
+//        dataset.addSeries(series);
+//        specs.add(spec) ;
+//        FindColor(spec,lineWidth);
+//    }
+
+
     //*******************Rendering the figures**************************************
     public void RenderPlot() {
         // Create chart
@@ -610,13 +625,13 @@ public class MatlabChart {
         colors.add(color);
         strokes.add(stroke);
     }
-    
+
     public void FindColor(int colorId, float lineWidth) {
     	int r = (int) (Math.random() * 255) ;
     	int g = (int) (Math.random() * 255) ;
     	int b = (int) (Math.random() * 255) ;
-        Color color = new Color(r, g, b) ;                 
-        BasicStroke stroke = new BasicStroke(lineWidth); 
+        Color color = new Color(r, g, b) ;
+        BasicStroke stroke = new BasicStroke(lineWidth);
         colors.add(color);
         strokes.add(stroke);
     }
@@ -742,11 +757,11 @@ public class MatlabChart {
         	chartFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
     }
-    
+
     public void show() {
     	this.run();
     }
-    
+
     public void show(boolean systemExit) {
     	this.run(systemExit);
     }
