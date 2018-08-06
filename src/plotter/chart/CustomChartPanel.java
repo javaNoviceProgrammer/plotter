@@ -12,8 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.swing.BorderFactory;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
+import javax.swing.border.Border;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -48,7 +50,9 @@ public class CustomChartPanel extends ChartPanel {
 	      exportToMATLAB.setActionCommand("exportToMATLAB");
 	      exportToMATLAB.addActionListener(this);
 	      getPopupMenu().add(exportToMATLAB);
-
+	      
+	      Border padding = BorderFactory.createEmptyBorder(10, 0, 0, 3) ;
+	      setBorder(padding);
 	   }
 	   public void actionPerformed(ActionEvent ae){
 	      if(ae.getActionCommand().equals("copyToClipboard")){
