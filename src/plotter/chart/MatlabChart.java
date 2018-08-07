@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -737,7 +735,7 @@ public class MatlabChart {
 
     public void run(){
         // look and feel
-        try {
+/*        try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -751,7 +749,7 @@ public class MatlabChart {
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
     	CustomChartPanel cpanel = new CustomChartPanel(this.chart, 640, 450, 640, 450, 640, 450, true, true, true, true, true, true) ;
 	    JFrame chartFrame = new JFrame() ;
 	    chartFrame.add(cpanel) ;
@@ -763,7 +761,7 @@ public class MatlabChart {
     }
 
     public void run(boolean systemExit){
-        try {
+/*        try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -777,7 +775,7 @@ public class MatlabChart {
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
     	CustomChartPanel cpanel = new CustomChartPanel(this.chart, 640, 450, 640, 450, 640, 450, true, true, true, true, true, true) ;
 	    JFrame chartFrame = new JFrame() ;
 	    chartFrame.add(cpanel) ;
