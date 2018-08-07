@@ -51,7 +51,7 @@ public class CustomChartPanel extends ChartPanel {
 	      exportToMATLAB.addActionListener(this);
 	      getPopupMenu().add(exportToMATLAB);
 	      
-	      Border padding = BorderFactory.createEmptyBorder(10, 0, 0, 3) ;
+	      Border padding = BorderFactory.createEmptyBorder(0, 0, 0, 0) ;
 	      setBorder(padding);
 	   }
 	   public void actionPerformed(ActionEvent ae){
