@@ -2,8 +2,9 @@ package plotter.chart;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Paint;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
@@ -21,8 +22,9 @@ import org.jfree.data.xy.XYZDataset;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 
+import plotter.util.ColorMap;
+import plotter.util.ColorMap.ColorMapName;
 import plotter.util.MeshGrid;
-import plotter.util.MoreMath;
 
 public class ColorMapPlot {
 
@@ -30,11 +32,25 @@ public class ColorMapPlot {
 	MeshGrid mesh ;
 	double[][] func ;
 	float dx, dy ;
+	ColorMapName colorMapName ;
 
     public ColorMapPlot(MeshGrid mesh, double[][] func) {
     	this.mesh = mesh ;
     	this.func = func ;
         chart = createChart(createDataset()) ;
+        this.colorMapName = ColorMapName.Rainbow ;
+    }
+    
+    public ColorMapPlot(MeshGrid mesh, double[][] func, ColorMapName colorMapName) {
+    	this.mesh = mesh ;
+    	this.func = func ;
+    	this.colorMapName = colorMapName ;
+        chart = createChart(createDataset()) ;
+    }
+    
+    public void setColorMap(ColorMapName name) {
+    	this.colorMapName = name ;
+    	chart = createChart(createDataset()) ;
     }
 
     public void run(boolean systemExit){
@@ -55,6 +71,9 @@ public class ColorMapPlot {
         };
         chartPanel.setMouseZoomable(true, false);
         f.add(chartPanel);
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/presentation.png"));
+        f.setIconImage(image);
+        f.setTitle("Plot Viewer v1.0");
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
@@ -63,6 +82,12 @@ public class ColorMapPlot {
     private JFreeChart createChart(XYDataset dataset) {
         NumberAxis xAxis = new NumberAxis("x Axis");
         NumberAxis yAxis = new NumberAxis("y Axis");
+        xAxis.setAutoRangeIncludesZero(false);
+        xAxis.setLowerBound(mesh.getX(0, 0));
+        xAxis.setUpperBound(mesh.getX(0, mesh.getXDim()-1));
+        yAxis.setAutoRangeIncludesZero(false);
+        yAxis.setLowerBound(mesh.getY(0, 0));
+        yAxis.setUpperBound(mesh.getY(mesh.getYDim()-1, 0));
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, null);
         XYBlockRenderer r = new XYBlockRenderer();
         double[] range = getFuncMinMax() ;
@@ -76,10 +101,11 @@ public class ColorMapPlot {
         NumberAxis scaleAxis = new NumberAxis("Scale");
         scaleAxis.setAxisLinePaint(Color.white);
         scaleAxis.setTickMarkPaint(Color.white);
+        scaleAxis.setAutoRangeIncludesZero(false);
         PaintScaleLegend legend = new PaintScaleLegend(ps, scaleAxis);
         legend.setSubdivisionCount(128);
         legend.setAxisLocation(AxisLocation.TOP_OR_RIGHT);
-        legend.setPadding(new RectangleInsets(10, 10, 10, 10));
+        legend.setPadding(new RectangleInsets(5, 10, 40, 10));
         legend.setStripWidth(20);
         legend.setPosition(RectangleEdge.RIGHT);
         legend.setBackgroundPaint(Color.WHITE);
@@ -118,10 +144,8 @@ public class ColorMapPlot {
     	return new double[] {min, max} ;
     }
 
-    private static class SpectrumPaintScale implements PaintScale {
+    private class SpectrumPaintScale implements PaintScale {
 
-        private static final float H1 = 0f;
-        private static final float H2 = 1f;
         private final double lowerBound;
         private final double upperBound;
 
@@ -142,29 +166,9 @@ public class ColorMapPlot {
 
         @Override
         public Paint getPaint(double value) {
-            float scaledValue = (float) (value / (getUpperBound() - getLowerBound()));
-            float scaledH = H1 + scaledValue * (H2 - H1);
-            return Color.getHSBColor(scaledH, 1f, 1f);
+        	ColorMap colorMap = new ColorMap(getLowerBound(), getUpperBound(), colorMapName) ;
+        	return colorMap.getColor(value) ;
         }
     }
 
-
-    // for test
-    public static void main(String[] args) {
-    	double[] x = MoreMath.linspace(-10.0, 10.0, 1000) ;
-    	double[] y = MoreMath.linspace(-10.0, 10.0, 1000) ;
-    	MeshGrid mesh = new MeshGrid(x, y) ;
-    	double[][] func = new double[y.length][x.length] ;
-    	for(int i=0; i<y.length; i++){
-    		for(int j=0; j<x.length; j++){
-    			func[i][j] = 2*Math.sin(mesh.getX(i, j))*Math.sin(mesh.getY(i, j)) ;
-    		}
-    	}
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ColorMapPlot(mesh, func).run(true);;
-            }
-        });
-    }
 }
