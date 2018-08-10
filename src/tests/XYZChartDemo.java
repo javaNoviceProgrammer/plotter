@@ -29,7 +29,7 @@ public class XYZChartDemo {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ChartPanel chartPanel = new ChartPanel(createChart(createDataset())) {
             /**
-			 * 
+			 *
 			 */
 			private static final long serialVersionUID = 1L;
 
@@ -52,8 +52,8 @@ public class XYZChartDemo {
         XYBlockRenderer r = new XYBlockRenderer();
         SpectrumPaintScale ps = new SpectrumPaintScale(0, N * N);
         r.setPaintScale(ps);
-        r.setBlockHeight(10.0f);
-        r.setBlockWidth(10.0f);
+        r.setBlockHeight(15.0f);
+        r.setBlockWidth(15.0f);
         plot.setRenderer(r);
         JFreeChart chart = new JFreeChart("Title",
             JFreeChart.DEFAULT_TITLE_FONT, plot, false);

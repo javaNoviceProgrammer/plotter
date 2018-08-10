@@ -118,24 +118,6 @@ public class ColorMapPlot {
     	return new double[] {min, max} ;
     }
 
-    public static void main(String[] args) {
-    	double[] x = MoreMath.linspace(-10.0, 10.0, 1000) ;
-    	double[] y = MoreMath.linspace(0.0, 10.0, 100) ;
-    	MeshGrid mesh = new MeshGrid(x, y) ;
-    	double[][] func = new double[y.length][x.length] ;
-    	for(int i=0; i<y.length; i++){
-    		for(int j=0; j<x.length; j++){
-    			func[i][j] = 2*Math.sin(mesh.getX(i, j))*Math.sin(mesh.getY(i, j)) ;
-    		}
-    	}
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ColorMapPlot(mesh, func).run(true);;
-            }
-        });
-    }
-
     private static class SpectrumPaintScale implements PaintScale {
 
         private static final float H1 = 0f;
@@ -164,5 +146,25 @@ public class ColorMapPlot {
             float scaledH = H1 + scaledValue * (H2 - H1);
             return Color.getHSBColor(scaledH, 1f, 1f);
         }
+    }
+
+
+    // for test
+    public static void main(String[] args) {
+    	double[] x = MoreMath.linspace(-10.0, 10.0, 1000) ;
+    	double[] y = MoreMath.linspace(-10.0, 10.0, 1000) ;
+    	MeshGrid mesh = new MeshGrid(x, y) ;
+    	double[][] func = new double[y.length][x.length] ;
+    	for(int i=0; i<y.length; i++){
+    		for(int j=0; j<x.length; j++){
+    			func[i][j] = 2*Math.sin(mesh.getX(i, j))*Math.sin(mesh.getY(i, j)) ;
+    		}
+    	}
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new ColorMapPlot(mesh, func).run(true);;
+            }
+        });
     }
 }
