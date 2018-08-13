@@ -9,12 +9,12 @@ import plotter.util.ColorMap.ColorMapName;
 
 public class Tutorial2 {
     public static void main(String[] args) {
-    	double[] x = MoreMath.linspace(1.0, 10.0, 1000) ;
+    	double[] x = MoreMath.linspace(1.0, 10.0, 500) ;
     	double[] y = MoreMath.linspace(10.0, 20.0, 1000) ;
     	MeshGrid mesh = new MeshGrid(x, y) ;
-    	double[][] func = new double[y.length][x.length] ;
-    	for(int i=0; i<y.length; i++){
-    		for(int j=0; j<x.length; j++){
+    	double[][] func = new double[x.length][y.length] ;
+    	for(int i=0; i<x.length; i++){
+    		for(int j=0; j<y.length; j++){
     			func[i][j] = 2*Math.sin(mesh.getX(i, j))*Math.sin(Math.PI*mesh.getY(i, j)) ;
     		}
     	}

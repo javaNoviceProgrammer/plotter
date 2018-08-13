@@ -84,10 +84,10 @@ public class ColorMapPlot {
         NumberAxis yAxis = new NumberAxis("y Axis");
         xAxis.setAutoRangeIncludesZero(false);
         xAxis.setLowerBound(mesh.getX(0, 0));
-        xAxis.setUpperBound(mesh.getX(0, mesh.getXDim()-1));
+        xAxis.setUpperBound(mesh.getX(mesh.getXDim()-1, 0));
         yAxis.setAutoRangeIncludesZero(false);
         yAxis.setLowerBound(mesh.getY(0, 0));
-        yAxis.setUpperBound(mesh.getY(mesh.getYDim()-1, 0));
+        yAxis.setUpperBound(mesh.getY(0, mesh.getYDim()-1));
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, null);
         XYBlockRenderer r = new XYBlockRenderer();
         double[] range = getFuncMinMax() ;
@@ -115,12 +115,12 @@ public class ColorMapPlot {
     }
 
     private XYZDataset createDataset() {
-    	dx = (float) (mesh.getX(0, 1) - mesh.getX(0, 0)) ;
-    	dy = (float) (mesh.getY(1, 0) - mesh.getY(0, 0)) ;
+    	dx = (float) (mesh.getX(1, 0) - mesh.getX(0, 0)) ;
+    	dy = (float) (mesh.getY(0, 1) - mesh.getY(0, 0)) ;
         DefaultXYZDataset dataset = new DefaultXYZDataset();
-        for (int i = 0; i < mesh.getYDim(); i++) {
-            double[][] data = new double[3][mesh.getXDim()];
-            for (int j = 0; j < mesh.getXDim(); j++) {
+        for (int i = 0; i < mesh.getXDim(); i++) {
+            double[][] data = new double[3][mesh.getYDim()];
+            for (int j = 0; j < mesh.getYDim(); j++) {
                 data[0][j] = mesh.getX(i, j);
                 data[1][j] = mesh.getY(i, j);
                 data[2][j] = func[i][j];

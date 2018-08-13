@@ -13,11 +13,15 @@ public class MeshGrid {
 	}
 
 	public double getX(int m, int n) {
-		return x[n] ;
+		return x[m] ;
 	}
 
 	public double getY(int m, int n) {
-		return y[m] ;
+		return y[n] ;
+	}
+	
+	public double[] getXY(int m, int n) {
+		return new double[] {getX(m, n), getY(m, n)} ;
 	}
 
 	public int getXDim() {
