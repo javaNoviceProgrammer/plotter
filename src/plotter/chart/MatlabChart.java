@@ -673,6 +673,7 @@ public class MatlabChart {
     	for(int i=0; i<M; i++){
     		colors.set(i, color) ;
     	}
+    	RenderPlot();
     }
 
     public void setAllColors(Color color){
@@ -680,6 +681,7 @@ public class MatlabChart {
     	for(int i=0; i<M; i++){
     		colors.set(i, color) ;
     	}
+    	RenderPlot();
     }
 
     public void setSpecificChartColor(int datasetNumber, javafx.scene.paint.Color colorfx){
