@@ -33,11 +33,11 @@ public class MeshGrid {
 	}
 
 	public int getRowDim() {
-		return getYDim() ;
+		return getXDim() ;
 	}
 
 	public int getColumnDim() {
-		return getXDim() ;
+		return getYDim() ;
 	}
 
 }
